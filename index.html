@@ -1,237 +1,418 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Chatbot</title>
-    <link rel="icon" href="favicon.png" type="image/png" />
-    <style>
-       #messageInput {
-    font-size: 16px !important;
-     }
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to right, #4da4d8, #bee7e1);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-      }
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="lume.png" type="image/png" />
+  <title>Lume Cafe</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5e8d2;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #5C3B1E;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header button {
+      background: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      color: #5C3B1E;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    header button:hover {
+      background-color: #e7cfa5;
+    }
+    .content-section {
+      display: none;
+      padding: 40px 20px;
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: #fffaf2;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .content-section.active {
+      display: block;
+    }
 
-      .chat-container {
-        width: 90vw;
-        max-width: 400px;
-        background-color: #f9fafb;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        animation: slideIn 0.6s ease-out;
-      }
+    /* Chatbot */
+    .chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #5C3B1E;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+    .chat-container {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 90vw;
+      max-width: 400px;
+      background-color: #fff6e9;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      display: none;
+      flex-direction: column;
+      max-height: 500px;
+      overflow: hidden;
+      z-index: 1100;
+    }
+    .chat-container.active {
+      display: flex;
+    }
+    #chat {
+      overflow-y: auto;
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .message {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .message.user {
+      flex-direction: row-reverse;
+    }
+    .bubble {
+      padding: 10px 15px;
+      border-radius: 20px;
+      max-width: 70%;
+      font-size: 14px;
+      word-wrap: break-word;
+    }
+    .chatbot .bubble {
+      background-color: #5C3B1E;
+      color: white;
+    }
+    .user .bubble {
+      background-color: #A8753B;
+      color: white;
+    }
+    .chat-input {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+      background-color: #fff6e9;
+      margin-top: 10px;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+    button.send-btn {
+      padding: 10px 20px;
+      border-radius: 20px;
+      background-color: #5C3B1E;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
 
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
+  <header>
+    <button onclick="showSection('home')">Anasayfa</button>
+    <button onclick="showSection('cold')">Soğuk Kahveler</button>
+    <button onclick="showSection('hot')">Sıcak Kahveler</button>
+    <button onclick="showSection('desserts')">Tatlılar</button>
+    <button onclick="showSection('about')">Hakkında</button>
+    <button onclick="showSection('contact')">İletişim</button>
+  </header>
+
+  <section id="home" class="content-section active">
+    <h2>Hoşgeldiniz!</h2>
+    <p>Kafemize hoş geldiniz! Lezzetli menümüzü keşfedin ve aşağıdaki asistanla sorularınızı sorabilirsiniz ☕</p>
+  </section>
+
+  <section id="cold" class="content-section">
+    <h2>Soğuk Kahveler</h2>
+    <ul>
+      <li>Ice Latte - 155 TL</li>
+      <li>Ice Americano - 150 TL</li>
+      <li>Ice Mocha - 160 TL</li>
+      <li>Ice Mocha – 155 TL</li>
+      <li>Frappe – 160 TL</li>
+      <li>Ice Caramel Macchiato – 160 TL</li>
+      <li>Ice White Chocolate Mocha – 160 TL</li>
+      <li>Ice Hazelnut Latte – 155 TL</li>
+      <li>Ice Chocolate – 150 TL</li>
+      <li>Affogato – 160 TL</li>
+
+    </ul>
+  </section>
+
+  <section id="hot" class="content-section">
+    <h2>Sıcak Kahveler</h2>
+    <ul>
+      <li>Filtre Kahve - 145 TL</li>
+      <li>Espresso - 140 TL</li>
+      <li>Latte - 150 TL</li>
+      <li>Latte – 150 TL</li>
+      <li>Cappuccino – 150 TL</li>
+      <li>Mocha – 155 TL</li>
+      <li>Caramel Macchiato – 155 TL</li>
+      <li>White Chocolate Mocha – 155 TL</li>
+      <li>Türk Kahvesi – 140 TL</li>
+      <li>Sıcak Çikolata – 150 TL</li>
+    </ul>
+  </section>
+
+  <section id="desserts" class="content-section">
+    <h2>Tatlılar</h2>
+    <ul>
+      <li>Cheesecake - 160 TL</li>
+      <li>Tiramisu - 155 TL</li>
+      <li>Brownie - 150 TL</li>
+      <li>Cookie – 135 TL</li>
+      <li>Profiterol – 150 TL</li>
+      <li>Donut – 140 TL</li>
+      <li>Magnolia – 150 TL</li>
+      <li>Waffle – 165 TL</li>
+      <li>Cupcake – 145 TL</li>
+      <li>Mozaik Pasta – 150 TL</li>
+    </ul>
+  </section>
+
+  <section id="about" class="content-section">
+    <h2>Hakkımızda</h2>
+    <p>Kafemiz, 2020 yılından beri taze çekilmiş kahveler ve enfes tatlılar ile misafirlerini ağırlıyor.</p>
+  </section>
+
+  <section id="contact" class="content-section">
+    <h2>İletişim</h2>
+    <p><strong>Adres:</strong> Özlüce Bulvarı No:42, Nilüfer, Bursa</p>
+    <p><strong>Telefon:</strong> 0555 123 45 67</p>
+    <p><strong>E-posta:</strong> info@lumecafe.com</p>
+    <p><strong>Instagram:</strong> @lumecafe</p>
+  </section>
+
+  <button class="chat-toggle" onclick="toggleChat()">💬</button>
+
+  <div class="chat-container" id="chatbox">
+    <div id="chat"></div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function toggleChat() {
+      document.getElementById('chatbox').classList.toggle('active');
+    }
+  </script>
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+  <script type="text/babel">
+    function ChatInput({ onSend }) {
+      const [inputValue, setInputValue] = React.useState('');
+
+      function handleSend() {
+        if (inputValue.trim() !== '') {
+          onSend(inputValue);
+          setInputValue('');
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
       }
 
-      .message {
-        display: flex;
-        align-items: flex-end;
-        gap: 10px;
-      }
+      return (
+        <div className="chat-input">
+          <input
+            placeholder="Mesajınızı yazabilirsiniz.."
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+          />
+          <button className="send-btn" onClick={handleSend}>Gönder</button>
+        </div>
+      );
+    }
 
-      .message.user {
-        flex-direction: row-reverse;
-      }
-
-      .bubble {
-        padding: 10px 15px;
-        border-radius: 20px;
-        max-width: 70%;
-        font-size: 14px;
-        word-wrap: break-word;
-      }
-
-      .chatbot .bubble {
-        background-color: #8d80c9;
-        color: white;
-      }
-
-      .user .bubble {
-        background-color: #4da4d8;
-        color: white;
-      }
-
-      .chat-input {
-        display: flex;
-        gap: 10px;
-      }
-
-      input {
-        flex: 1;
-        padding: 10px;
-        border-radius: 20px;
-        border: 1px solid #ccc;
-        outline: none;
-      }
-
-      button {
-        padding: 10px 20px;
-        border-radius: 20px;
-        background-color: #4da4d8;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-
-      img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-      }
-
-      .typing span {
-        font-size: 14px;
-        padding: 0 2px;
-        animation: blink 1.5s infinite;
-      }
-
-      .bubble.typing {
-        background-color: #8d80c9;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        border-radius: 20px;
-        padding: 10px 15px;
-        font-size: 14px;
-      }
-
-      .typing span:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-
-      .typing span:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-
-      @keyframes blink {
-        0% { opacity: 0; }
-        50% { opacity: 1; }
-        100% { opacity: 0; }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="chat-container" id="chat"></div>
-
-    <script src="https://unpkg.com/supersimpledev/react.js"></script>
-    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
-    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
-    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
-
-    <script type="text/babel">
-      function ChatInput({ onSend }) {
-        const [inputValue, setInputValue] = React.useState('');
-
-        function handleSend() {
-          if (inputValue.trim() !== '') {
-            onSend(inputValue);
-            setInputValue('');
-          }
-        }
-
-        return (
-          <div className="chat-input">
-            <input
-              placeholder="Send a message to Chatbot"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+    function ChatMessage({ message, sender }) {
+      const isTyping = message === '__typing__';
+      return (
+        <div className={`message ${sender}`}>
+          {sender === 'chatbot' && (
+            <img
+              src="chatbot.png"
+              alt="Chatbot"
+              style={{ width: 32, height: 32, borderRadius: '50%' }}
             />
-            <button onClick={handleSend}>Send</button>
-          </div>
-        );
-      }
+          )}
+          {isTyping ? (
+            <div className="bubble typing">
+              <span>.</span><span>.</span><span>.</span>
+            </div>
+          ) : (
+            <div className="bubble" dangerouslySetInnerHTML={{ __html: message }} />
+          )}
+          {sender === 'user' && (
+            <img
+              src="user.png"
+              alt="User"
+              style={{ width: 32, height: 32, borderRadius: '50%' }}
+            />
+          )}
+        </div>
+      );
+    }
 
-      function ChatMessage({ message, sender }) {
-        const isTyping = message === '__typing__';
-        return (
-          <div className={`message ${sender}`}>
-            {sender === 'chatbot' && <img src="chatbot.png" />}
-            {isTyping ? (
-              <div className="bubble typing">
-                <span>.</span><span>.</span><span>.</span>
-              </div>
-            ) : (
-              <div className="bubble" dangerouslySetInnerHTML={{ __html: message }} />
-            )}
-            {sender === 'user' && <img src="user.png" />}
-          </div>
-        );
-      }
+    function App() {
+      const [messages, setMessages] = React.useState([
+        { message: "Hoşgeldiniz!☕ Size nasıl yardımcı olabilirim?", sender: "chatbot" }
+      ]);
+      const chatRef = React.useRef(null);
 
-      function App() {
-        const [messages, setMessages] = React.useState([
-          { message: "Hello! I'm your assistant.", sender: "chatbot" }
-        ]);
-
-        function handleSend(userMessage) {
-          const updated = [...messages, { message: userMessage, sender: 'user' }];
-          setMessages([...updated, { message: '__typing__', sender: 'chatbot' }]);
-
-          setTimeout(() => {
-            const lower = userMessage.toLowerCase();
-            let reply = "I'm not sure how to respond.";
-
-            if (lower.includes("hi") || lower.includes("hello")) {
-              reply = "Hi there!";
-            } else if (lower.includes("how are you")) {
-              reply = "I'm doing well, thank you!";
-            } else if (lower.includes("name")) {
-              reply = "I'm your chatbot assistant.";
-            } else if (lower.includes("date")) {
-              reply = "Today's date is " + dayjs().format('MMMM D, YYYY');
-            } else if (lower.includes("time")) {
-              reply = "Current time is " + dayjs().format('HH:mm');
-            } else if (lower.includes("joke")) {
-              reply = "Why did the math book look sad? Because it had too many problems!";
-            } else if (lower.includes("weather")) {
-              reply = "It's really hot today, must be sunny out there.";
-            } else if (lower.includes("goodbye") || lower.includes("bye")) {
-              reply = "Goodbye, see you soon!";
-            } else if (lower.includes("purpose")) {
-              reply = "To help you and answer your questions 💡";
-            } else if (lower.includes("google")) {
-              reply = 'Sure!<br/><a href="https://google.com" target="_blank" style="color:#0084ff; text-decoration:underline;">Click here to open Google</a>';
-            }
-
-            setMessages([...updated, { message: reply, sender: 'chatbot' }]);
-          }, 1000);
+      React.useEffect(() => {
+        if (chatRef.current) {
+          chatRef.current.scrollTop = chatRef.current.scrollHeight;
         }
+      }, [messages]);
 
-        return (
-          <>
-            {messages.map((msg, i) => (
-              <ChatMessage key={i} message={msg.message} sender={msg.sender} />
-            ))}
-            <ChatInput onSend={handleSend} />
-          </>
-        );
+      function handleSend(userMessage) {
+        const updated = [...messages, { message: userMessage, sender: 'user' }];
+        setMessages([...updated, { message: '__typing__', sender: 'chatbot' }]);
+
+        setTimeout(() => {
+          const lower = userMessage.toLowerCase();
+          let reply = "Üzgünüm, anlayamadım.";
+
+          if (lower.includes("kahve")) {
+            reply = "Filtre kahvemiz 145 TL, latte 150 TL.";
+          } else if (lower.includes("açık mısınız") || lower.includes("saat")) {
+            reply = "Kafemiz her gün 09:00 - 23:00 arası açıktır.";
+          } else if (lower.includes("rezervasyon")) {
+            reply = "Rezervasyon için 0555 123 45 67 numarasını arayabilirsiniz.";
+          }else if (lower.includes("wifi")) {
+          reply = "Evet, ücretsiz Wi-Fi hizmetimiz vardır.Lume Cafe🛜 Şifre: LUME2025.";
+          }else if (lower.includes("menü")) {
+          reply = "Menümüzü yukarıdaki sekmelerden görebilirsiniz: Soğuk Kahveler, Sıcak Kahveler, Tatlılar..";
+          } else if (lower.includes("konum")) {
+            reply = "Adresimiz: Özlüce Bulvarı No:42, Nilüfer, Bursa..";
+          }else if (lower.includes("nerede")) {
+            reply = "Kafemiz Özlüce Bulvarı'nda, Nilüfer/Bursa'da yer alıyor..";
+          }else if (lower.includes("tuvalet") || lower.includes("lavabo")) {
+            reply = "Tuvaletimiz içeride, arka bölümde yer almaktadır..";
+          }else if (lower.includes("cheesecake")) {
+            reply = "Cheesecake tatlı menümüzde yer alıyor ve fiyatı 160 TL.";
+          }else if (lower.includes("kahvaltı")) {
+            reply = "Şu anda kahvaltı menümüz bulunmamaktadır, sadece kahve ve tatlı servisi yapıyoruz..";
+          }else if (lower.includes("içecek")) {
+            reply = "Soğuk ve sıcak kahve çeşitlerimiz için yukarıdaki menüyü inceleyebilirsiniz..";
+          }else if (lower.includes("çalışma saat")) {
+            reply = "Kafemiz her gün 09:00 - 23:00 arasında açıktır..";
+          }else if (lower.includes("öğrenci indirimi")) {
+          reply = "Evet, öğrencilere özel %10 indirimimiz mevcuttur. Öğrenci kartınızı göstermeniz yeterli.";
+          }else if (lower.includes("kredi kartı")) {
+            reply = "Evet, kredi kartı ve temassız ödeme kabul ediyoruz..";
+          }else if (lower.includes("nakit")) {
+            reply = "Evet, nakit ödeme de kabul ediyoruz..";
+          }else if (lower.includes("tatlı öner")) {
+            reply = "Cheesecake ve tiramisu çok seviliyor, denemenizi öneririz!.";
+          }else if (lower.includes("tatlı çeşitleri")) {
+            reply = "Tatlı menümüzde cheesecake, tiramisu, brownie gibi birçok seçenek var!";
+          } else if (lower.includes("tatlı")) {
+            reply = "Tatlı menümüzde cheesecake (160 TL), tiramisu (155 TL), brownie (150 TL) var.";  
+          }else if (lower.includes("vegan")) {
+            reply = "Şu anda vegan seçeneklerimiz sınırlı, ancak yakında menümüze eklenecek..";
+          }else if (lower.includes("kalabalık")|| lower.includes("yoğun")) {
+            reply = "Yoğunluk saatlerimiz genellikle 18:00-21:00 arasıdır. Daha sakin bir ortam için sabah saatlerini tercih edebilirsiniz..";
+          }else if (lower.includes("avm") || lower.includes("alışveriş")) {
+            reply = "Yakınımızda birkaç butik mağaza ve bir alışveriş merkezi bulunuyor..";
+          }else if (lower.includes("tatil")) {
+            reply = "Resmi tatillerde açık olup olmadığımızı öğrenmek için lütfen Instagram sayfamızı kontrol edin: @lumecafe.";
+          }else if (lower.includes("instagram") | lower.includes("insta") | lower.includes("ig")) { 
+            reply = "Instagram hesabımız: @lumecafe — takip etmeyi unutmayın 😊.";
+          } else if (lower.includes("iyi akşamlar")) {
+            reply = "İyi akşamlar! Lume Cafe'de sizi ağırlamaktan mutluluk duyarız.";
+          } else if (lower.includes("en çok satan tatlı")) {
+            reply = "En çok tercih edilen tatlılarımız cheesecake ve tiramisudur.";
+          } else if (lower.includes("kahve çeşitleri")) {
+            reply = "Kahve çeşitlerimiz arasında filtre kahve, espresso, latte, mocha ve daha fazlası var.";
+          } else if (lower.includes("park yeri")) {
+            reply = "Mekanın önünde ücretsiz park yeri bulunmaktadır.";
+          } else if (lower.includes("çalışan sayısı")) {
+            reply = "Kafemizde 10 kişilik güler yüzlü bir ekip çalışmaktadır.";
+          } else if (lower.includes("müzik")) {
+            reply = "Arka planda yumuşak caz ve klasik müzikler çalıyor.";
+          } else if (lower.includes("evcil hayvan")) {
+            reply = "Evcil hayvan dostu bir kafeyiz, dış mekanda evcil hayvan kabul ediyoruz.";
+          } else if (lower.includes("doğum günü")) {
+            reply = "Doğum günü kutlamaları için önceden rezervasyon yapabilirsiniz.";
+          } else if (lower.includes("kahve workshop")) {
+            reply = "Yakında kahve workshopları düzenleyeceğiz, takipte kalın!";
+          } else if (lower.includes("sosyal medya")) {
+            reply = "Instagram hesabımız @lumecafe — bizi oradan da takip edebilirsiniz!";
+          } else if (lower.includes("yoğunluk")) {
+            reply = "Genellikle akşam 18:00-21:00 arası daha yoğunuz, sabahları daha sakin oluyor.";
+          } else if (lower.includes("özel sipariş")) {
+            reply = "Özel siparişler için lütfen telefonla veya Instagram'dan bize ulaşın.";
+          } else if (lower.includes("görüş")) {
+            reply = "Misafirlerimizin görüşleri bizim için çok önemli, Instagram sayfamızdan yorumları okuyabilirsiniz.";
+          } else if (lower.includes("hizmetler")) {
+            reply = "Kafe olarak kahve, tatlı, ücretsiz wifi ve samimi bir ortam sunuyoruz.";
+          } else if (lower.includes("rezervasyon iptal")) {
+            reply = "Rezervasyon iptali için lütfen bizi arayın: 0555 123 45 67.";
+          } else if (lower.includes("iş başvurusu")) {
+            reply = "İş başvuruları için info@lumecafe.com adresine mail atabilirsiniz.";
+          } else if (lower.includes("engelli erişimi")) {
+            reply = "Kafemiz engelli erişimine uygundur, rahatça gelebilirsiniz.";
+          } else if (lower.includes("çalışma ortamı")) {
+            reply = "Sessiz ve rahat çalışma ortamı sunuyoruz, wifi de ücretsiz.";
+          } else if (lower.includes("misafir ağırlama")) {
+            reply = "Toplu misafir ağırlama için önceden haber verirseniz hazırlık yaparız.";
+          } else if (lower.includes("günaydın")) {
+            reply = "Günaydın! Güzel bir kahveyle harika bir gün sizi bekliyor!";
+          }
+          setMessages([...updated, { message: reply, sender: 'chatbot' }]);
+        }, 1000);
       }
 
-      const container = document.getElementById('chat');
-      ReactDOM.createRoot(container).render(<App />);
-    </script>
-  </body>
+      return (
+        <div style={{ flexGrow: 1, overflowY: 'auto' }} ref={chatRef}>
+          {messages.map((msg, i) => (
+            <ChatMessage key={i} message={msg.message} sender={msg.sender} />
+          ))}
+          <ChatInput onSend={handleSend} />
+        </div>
+      );
+    }
+
+    const container = document.getElementById('chat');
+    ReactDOM.createRoot(container).render(<App />);
+  </script>
+
+</body>
 </html>
