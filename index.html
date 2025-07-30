@@ -6,6 +6,52 @@
   <link rel="icon" href="lume.png" type="image/png" />
   <title>Lume Cafe</title>
   <style>
+    @media (max-width: 768px) {
+    header {
+      flex-wrap: wrap; 
+      padding: 10px 5px;
+      gap: 8px;
+    }
+    header button {
+      flex: 1 1 30%; 
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 15px;
+    }
+    .chat-container {
+      width: 95vw !important; 
+      max-width: none !important;
+      bottom: 70px; 
+      right: 2.5vw !important;
+      max-height: 60vh !important;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    .chat-input {
+      position: sticky;
+      bottom: 0;
+      background-color: #fff6e9;
+      padding: 8px 10px;
+      border-top: 1px solid #ddd;
+      z-index: 1200; 
+      gap: 8px;
+    }
+    input {
+      font-size: 16px;
+      padding: 12px;
+      border-radius: 20px;
+    }
+    button.send-btn {
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+    #chat {
+      max-height: calc(60vh - 60px); 
+      overflow-y: auto;
+      padding-bottom: 0; 
+    }
+  }
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #f5e8d2;
