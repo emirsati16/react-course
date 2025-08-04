@@ -12,6 +12,7 @@
     }
     .card {
     width: 48%; 
+    flex: 0 0 48%; 
     }
     header {
       flex-wrap: wrap; 
@@ -196,12 +197,22 @@
       background: #fffaf2;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 160px;
       text-align: center;
       padding: 10px;
       transition: transform 0.2s;
       cursor: pointer;
     }
+    @media (max-width: 768px) {
+  .card {
+    flex: 0 0 48%;
+    }
+  }
+    @media (min-width: 769px) {
+  .card {
+    flex: 0 0 160px;
+    }
+  }
+
 
     .card:hover {
       transform: scale(1.05);
