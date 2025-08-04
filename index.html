@@ -6,6 +6,56 @@
   <link rel="icon" href="lume.png" type="image/png" />
   <title>Lume Cafe</title>
   <style>
+    .content-section {
+    position:relative ;
+    margin-top: 1rem;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 40px 20px;
+    background-color: #fffaf2;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    color: #5C3B1E;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .content-section h2 {
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #A8753B;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+  }
+
+  .content-section p {
+    max-width: 600px;
+    font-size: 16px;
+    margin: 0 auto;
+    color: #5C3B1E;
+  }
+
+  @media (max-width: 768px) {
+    .content-section {
+      padding: 30px 15px;
+      max-width: 90vw;
+    }
+    .content-section h2 {
+      font-size: 22px;
+    }
+    .content-section p {
+      font-size: 14px;
+    }
+  }
+
     body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #f5e8d2;
@@ -17,26 +67,30 @@ header {
   background-color: #5C3B1E;
   padding: 15px;
   display: flex;
-  justify-content: center;
-  gap: 12px;
+  justify-content: center; 
+  gap: 20px; 
   position: sticky;
   top: 0;
   z-index: 1000;
+  flex-wrap: wrap; 
 }
 
 header button {
-  background: #fff;
+  background: linear-gradient(135deg, #ab8559, #6c533c); 
   border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  color: #5C3B1E;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  color: #fff;
   cursor: pointer;
-  transition: 0.3s;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 header button:hover {
-  background-color: #e7cfa5;
+  background: linear-gradient(135deg, #5C3B1E, #A8753B);
+  transform: scale(1.05);
 }
 
 .content-section {
@@ -336,14 +390,14 @@ button.send-btn {
       <img src="images/ice-chocolate.webp" alt="Ice Chocolate" />
       <div class="card-info">
         <h3>Ice Chocolate</h3>
-        <p>150 TL</p>
+        <p>110 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/affogato.jpeg" alt="Affogato" />
       <div class="card-info">
         <h3>Affogato</h3>
-        <p>160 TL</p>
+        <p>130 TL</p>
       </div>
     </div>
   </div>
@@ -356,14 +410,14 @@ button.send-btn {
       <img src="images/filtre-kahve.webp" alt="Filtre Kahve" />
       <div class="card-info">
         <h3>Filtre Kahve</h3>
-        <p>145 TL</p>
+        <p>95 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/espresso.webp" alt="Espresso" />
       <div class="card-info">
         <h3>Espresso</h3>
-        <p>140 TL</p>
+        <p>105 TL</p>
       </div>
     </div>
     <div class="card">
@@ -377,7 +431,7 @@ button.send-btn {
       <img src="images/flat-white.jpg" alt="Flat White" />
       <div class="card-info">
         <h3>Flat White</h3>
-        <p>150 TL</p>
+        <p>135 TL</p>
       </div>
     </div>
     <div class="card">
@@ -412,14 +466,14 @@ button.send-btn {
       <img src="images/turk-kahvesi.jpg" alt="Türk Kahvesi" />
       <div class="card-info">
         <h3>Türk Kahvesi</h3>
-        <p>140 TL</p>
+        <p>115 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/sicak-cikolata.jpg" alt="Sıcak Çikolata" />
       <div class="card-info">
         <h3>Sıcak Çikolata</h3>
-        <p>150 TL</p>
+        <p>85 TL</p>
       </div>
     </div>
   </div>
@@ -446,56 +500,56 @@ button.send-btn {
       <img src="images/brownie.jpg" alt="Brownie" />
       <div class="card-info">
         <h3>Brownie</h3>
-        <p>150 TL</p>
+        <p>105 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/cookie.jpg" alt="Cookie" />
       <div class="card-info">
         <h3>Cookie</h3>
-        <p>135 TL</p>
+        <p>90 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/profiterol.webp" alt="Profiterol" />
       <div class="card-info">
         <h3>Profiterol</h3>
-        <p>150 TL</p>
+        <p>80 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/donut.jpg" alt="Donut" />
       <div class="card-info">
         <h3>Donut</h3>
-        <p>140 TL</p>
+        <p>60 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/magnolia.avif" alt="Magnolia" />
       <div class="card-info">
         <h3>Magnolia</h3>
-        <p>150 TL</p>
+        <p>120 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/waffle.jpg" alt="Waffle" />
       <div class="card-info">
         <h3>Waffle</h3>
-        <p>165 TL</p>
+        <p>185 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/cupcake.jpg" alt="Cupcake" />
       <div class="card-info">
         <h3>Cupcake</h3>
-        <p>145 TL</p>
+        <p>80 TL</p>
       </div>
     </div>
     <div class="card">
       <img src="images/mozaik-pasta.webp" alt="Mozaik Pasta" />
       <div class="card-info">
         <h3>Mozaik Pasta</h3>
-        <p>150 TL</p>
+        <p>135 TL</p>
       </div>
     </div>
   </div>
