@@ -93,8 +93,6 @@
     .content-section.active {
       display: block;
     }
-
-    /* Chatbot */
     .chat-toggle {
       position: fixed;
       bottom: 20px;
@@ -181,6 +179,48 @@
       border: none;
       cursor: pointer;
     }
+    .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+    }
+
+    .card {
+      background: #fffaf2;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 160px;
+      text-align: center;
+      padding: 10px;
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card-info h3 {
+      font-size: 18px;
+      margin: 5px 0;
+      color: #5C3B1E;
+    }
+
+    .card-info p {
+      font-weight: bold;
+      color: #A8753B;
+      margin: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -201,51 +241,230 @@
 
   <section id="cold" class="content-section">
     <h2>Soğuk Kahveler</h2>
-    <ul>
-      <li>Ice Latte - 155 TL</li>
-      <li>Ice Americano - 150 TL</li>
-      <li>Ice Mocha - 160 TL</li>
-      <li>Ice Mocha – 155 TL</li>
-      <li>Frappe – 160 TL</li>
-      <li>Ice Caramel Macchiato – 160 TL</li>
-      <li>Ice White Chocolate Mocha – 160 TL</li>
-      <li>Ice Hazelnut Latte – 155 TL</li>
-      <li>Ice Chocolate – 150 TL</li>
-      <li>Affogato – 160 TL</li>
-
-    </ul>
+    <div class="card-container">
+      <div class="card">
+        <img src="images/ice-latte.png" alt="Ice Latte" />
+          <div class="card-info">
+          <h3>Ice Latte</h3>
+          <p>155 TL</p>
+        </div>
+      </div>
+    <div class="card">
+      <img src="images/ice-americano.jpg" alt="Ice Americano" />
+      <div class="card-info">
+        <h3>Ice Americano</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/ice-mocha.jpg" alt="Ice Mocha" />
+      <div class="card-info">
+        <h3>Ice Mocha</h3>
+        <p>160 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/cold-brew.webp" alt="Cold Brew" />
+      <div class="card-info">
+        <h3>Cold Brew</h3>
+        <p>155 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/frappe.jpg" alt="Frappe" />
+      <div class="card-info">
+        <h3>Frappe</h3>
+        <p>160 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/ice-caramel-macchiato.jpg" alt="Ice Caramel Macchiato" />
+      <div class="card-info">
+        <h3>Ice Caramel Macchiato</h3>
+        <p>160 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/ice-white-chocolate-mocha.png" alt="Ice White Chocolate Mocha" />
+      <div class="card-info">
+        <h3>Ice White Chocolate Mocha</h3>
+        <p>160 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/ice-hazelnut-latte.webp" alt="Ice Hazelnut Latte" />
+      <div class="card-info">
+        <h3>Ice Hazelnut Latte</h3>
+        <p>155 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/ice-chocolate.webp" alt="Ice Chocolate" />
+      <div class="card-info">
+        <h3>Ice Chocolate</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/affogato.jpeg" alt="Affogato" />
+      <div class="card-info">
+        <h3>Affogato</h3>
+        <p>160 TL</p>
+      </div>
+    </div>
+  </div>
   </section>
 
   <section id="hot" class="content-section">
     <h2>Sıcak Kahveler</h2>
-    <ul>
-      <li>Filtre Kahve - 145 TL</li>
-      <li>Espresso - 140 TL</li>
-      <li>Latte - 150 TL</li>
-      <li>Latte – 150 TL</li>
-      <li>Cappuccino – 150 TL</li>
-      <li>Mocha – 155 TL</li>
-      <li>Caramel Macchiato – 155 TL</li>
-      <li>White Chocolate Mocha – 155 TL</li>
-      <li>Türk Kahvesi – 140 TL</li>
-      <li>Sıcak Çikolata – 150 TL</li>
-    </ul>
+  <div class="card-container">
+    <div class="card">
+      <img src="images/filtre-kahve.webp" alt="Filtre Kahve" />
+      <div class="card-info">
+        <h3>Filtre Kahve</h3>
+        <p>145 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/espresso.webp" alt="Espresso" />
+      <div class="card-info">
+        <h3>Espresso</h3>
+        <p>140 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/latte.jpg" alt="Latte" />
+      <div class="card-info">
+        <h3>Latte</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/flat-white.jpg" alt="Flat White" />
+      <div class="card-info">
+        <h3>Flat White</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/cappuccino.jpg" alt="Cappuccino" />
+      <div class="card-info">
+        <h3>Cappuccino</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/mocha.png" alt="Mocha" />
+      <div class="card-info">
+        <h3>Mocha</h3>
+        <p>155 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/caramel-macchiato.jpg" alt="Caramel Macchiato" />
+      <div class="card-info">
+        <h3>Caramel Macchiato</h3>
+        <p>155 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/white-chocolate-mocha.jpg" alt="White Chocolate Mocha" />
+      <div class="card-info">
+        <h3>White Chocolate Mocha</h3>
+        <p>155 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/turk-kahvesi.jpg" alt="Türk Kahvesi" />
+      <div class="card-info">
+        <h3>Türk Kahvesi</h3>
+        <p>140 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/sicak-cikolata.jpg" alt="Sıcak Çikolata" />
+      <div class="card-info">
+        <h3>Sıcak Çikolata</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+  </div>
   </section>
 
   <section id="desserts" class="content-section">
-    <h2>Tatlılar</h2>
-    <ul>
-      <li>Cheesecake - 160 TL</li>
-      <li>Tiramisu - 155 TL</li>
-      <li>Brownie - 150 TL</li>
-      <li>Cookie – 135 TL</li>
-      <li>Profiterol – 150 TL</li>
-      <li>Donut – 140 TL</li>
-      <li>Magnolia – 150 TL</li>
-      <li>Waffle – 165 TL</li>
-      <li>Cupcake – 145 TL</li>
-      <li>Mozaik Pasta – 150 TL</li>
-    </ul>
+   <h2>Tatlılar</h2>
+  <div class="card-container">
+    <div class="card">
+      <img src="images/cheesecake.jpg" alt="Cheesecake" />
+      <div class="card-info">
+        <h3>Cheesecake</h3>
+        <p>160 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/tiramisu.webp" alt="Tiramisu" />
+      <div class="card-info">
+        <h3>Tiramisu</h3>
+        <p>155 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/brownie.jpg" alt="Brownie" />
+      <div class="card-info">
+        <h3>Brownie</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/cookie.jpg" alt="Cookie" />
+      <div class="card-info">
+        <h3>Cookie</h3>
+        <p>135 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/profiterol.webp" alt="Profiterol" />
+      <div class="card-info">
+        <h3>Profiterol</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/donut.jpg" alt="Donut" />
+      <div class="card-info">
+        <h3>Donut</h3>
+        <p>140 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/magnolia.avif" alt="Magnolia" />
+      <div class="card-info">
+        <h3>Magnolia</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/waffle.jpg" alt="Waffle" />
+      <div class="card-info">
+        <h3>Waffle</h3>
+        <p>165 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/cupcake.jpg" alt="Cupcake" />
+      <div class="card-info">
+        <h3>Cupcake</h3>
+        <p>145 TL</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/mozaik-pasta.webp" alt="Mozaik Pasta" />
+      <div class="card-info">
+        <h3>Mozaik Pasta</h3>
+        <p>150 TL</p>
+      </div>
+    </div>
+  </div>
   </section>
 
   <section id="about" class="content-section">
@@ -468,7 +687,7 @@
           } else if (lower.includes("rezervasyon iptal")) {
             reply = "Rezervasyon iptali için lütfen bizi arayın: 0555 123 45 67.";
           
-          } else if (lower.includes("iş başvurusu")) {
+          } else if (lower.includes("iş")) {
             reply = "İş başvuruları için info@lumecafe.com adresine mail atabilirsiniz.";
           
           } else if (lower.includes("engelli erişimi")) {
@@ -483,14 +702,14 @@
           } else if (lower.includes("günaydın")| lower.includes("merhaba") | lower.includes("selam") | lower.includes("iyi günler") | lower.includes("selamlar"))  {
             reply = "Merhaba! Güzel bir kahveyle harika bir gün sizi bekliyor!";
           
-          }else if (lower.includes("Nasılsın")) {
+          }else if (lower.includes("nasılsın")) {
             reply = "Çok teşekkür ederim size hizmet etmek için burdayım, siz nasılsınız?";
           
           }else if (lower.includes("boy") | lower.includes("orta boy") | lower.includes("küçük boy") | lower.includes("büyük boy")) {
             reply = "Kahvelerimizi özenle belirlediğimiz tek boyda sunuyoruz. Böylece her fincanda aynı lezzeti garanti ediyoruz ☕";
           
           }else if (lower.includes("laktozlu") | lower.includes("laktozsuz") | lower.includes("laktoslu") | lower.includes("laktossuz")) {
-            reply = "Chatbotun cevabı buraya.";
+            reply = "Dilediğiniz şekilde hazırlıyoruz bize söylemeniz yeterli 😊.";
           
           }else if (lower.includes("kampanya")) {
             reply = "2 tatlı sipariş eden müşterilerimize bir soğuk içeceği bizden hediye..";
